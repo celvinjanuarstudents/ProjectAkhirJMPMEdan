@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InputData">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="197dp"
+        android:layout_height="206dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="28dp"
+        android:src="@drawable/image" />
+
+    <EditText
+        android:id="@+id/ednama"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:layout_below="@id/imageView3"
+        android:layout_marginTop="28dp"
+        android:layout_centerHorizontal="true"
+        android:hint="Nama"
+        android:minHeight="48dp"
+        android:padding="10dp" />
+
+    <EditText
+        android:id="@+id/edumur"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:layout_below="@id/ednama"
+        android:layout_marginTop="28dp"
+        android:layout_centerHorizontal="true"
+        android:hint="Umur"
+        android:minHeight="48dp"
+        android:padding="10dp" />
+    <EditText
+        android:id="@+id/edmoto"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:layout_below="@id/edumur"
+        android:layout_marginTop="28dp"
+        android:layout_centerHorizontal="true"
+        android:hint="Moto"
+        android:minHeight="48dp"
+        android:padding="10dp" />
+
+    <Button
+        android:id="@+id/btsimpan"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edmoto"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="28dp"
+        android:minHeight="48dp"
+        android:padding="10dp"
+
+        android:text="Simpan" />
+</RelativeLayout>
