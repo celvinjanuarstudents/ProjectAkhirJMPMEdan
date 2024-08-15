@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <Button
+        android:id="@+id/btnLihatData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lihat Data" />
+
+    <Button
+        android:id="@+id/btnUpdateData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update Data"
+        android:layout_marginTop="8dp"/>
+
+    <Button
+        android:id="@+id/btnHapusData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hapus Data"
+        android:layout_marginTop="8dp"/>
+</LinearLayout>

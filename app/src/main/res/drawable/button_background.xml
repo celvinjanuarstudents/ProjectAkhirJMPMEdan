@@ -1,0 +1,5 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#FF6200EE"/> <!-- Warna background button -->
+    <corners android:radius="0dp"/> <!-- Membuat sudut-sudut kotak -->
+    <stroke android:width="2dp" android:color="#FF3700B3"/> <!-- Garis tepi (opsional) -->
+</shape>

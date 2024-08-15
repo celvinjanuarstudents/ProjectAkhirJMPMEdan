@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
+
     // Constants for the User table
     public static final String USER_DATABASE_NAME = "AppMHS";
     public static final String USER_TABLE_NAME = "tbluser";
@@ -16,11 +17,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TABLE_NAME = "tbldata";
     private static final String COL_1 = "ID";
-    private static final String COL_2 = "NAMA";
-    private static final String COL_3 = "UMUR";
-    private static final String COL_4 = "MOTO";
+    private static final String COL_2 = "NIK";
+    private static final String COL_3 = "NAMA";
+    private static final String COL_4 = "TANGGAL_LAHIR";
+    private static final String COL_5 = "JENIS_KELAMIN";
+    private static final String COL_6 = "ALAMAT";
 
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     public DatabaseHelper(Context context) {
         super(context, USER_DATABASE_NAME, null, DATABASE_VERSION);
@@ -34,11 +37,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 USER_COL_2 + " TEXT, " +
                 USER_COL_3 + " TEXT)");
 
+        // Create data table with new columns
         String sql = "CREATE TABLE " + TABLE_NAME + " (" +
                 COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COL_2 + " TEXT, " +
-                COL_3 + " INTEGER," +
-                COL_4 + " TEXT)";
+                COL_3 + " TEXT, " +
+                COL_4 + " TEXT, " +  // Tanggal Lahir
+                COL_5 + " TEXT, " +  // Jenis Kelamin
+                COL_6 + " TEXT)";    // Alamat
         db.execSQL(sql);
     }
 
@@ -48,26 +54,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + USER_TABLE_NAME);
         onCreate(db);
 
+        // Upgrade data table
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
 
-    public boolean insertData(String nama, int umur, String moto) {
+    public boolean insertData(String nik, String nama, String tanggalLahir, String jenisKelamin, String alamat) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_2, nama);
-        contentValues.put(COL_3, umur);
-        contentValues.put(COL_4, moto);
+        contentValues.put(COL_2, nik);
+        contentValues.put(COL_3, nama);
+        contentValues.put(COL_4, tanggalLahir);
+        contentValues.put(COL_5, jenisKelamin);
+        contentValues.put(COL_6, alamat);
         long result = db.insert(TABLE_NAME, null, contentValues);
         return result != -1;
     }
-    public boolean updateData(String id, String nama, int umur, String moto) {
+
+    public boolean updateData(String id, String nik, String nama, String tanggalLahir, String jenisKelamin, String alamat) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_1, id);
-        contentValues.put(COL_2, nama);
-        contentValues.put(COL_3, umur);
-        contentValues.put(COL_4, moto);
+        contentValues.put(COL_2, nik);
+        contentValues.put(COL_3, nama);
+        contentValues.put(COL_4, tanggalLahir);
+        contentValues.put(COL_5, jenisKelamin);
+        contentValues.put(COL_6, alamat);
         db.update(TABLE_NAME, contentValues, "ID = ?", new String[]{id});
         return true;
     }
@@ -76,11 +88,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TABLE_NAME, "ID = ?", new String[]{id});
     }
+
     public Cursor getAllData() {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
     }
-
 
     // User table methods
     public boolean insertUser(String user, String password) {
@@ -104,6 +116,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor.getCount() > 0;
     }
 
-
+    public Cursor getDataById(String id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("SELECT * FROM table_name WHERE ID=?", new String[]{id});
+        if (res != null && res.getCount() > 0) {
+            res.moveToFirst();
+        }
+        return res; // Tambahkan ini
+    }
 
 }
